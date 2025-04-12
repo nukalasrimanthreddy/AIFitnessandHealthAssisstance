@@ -6,7 +6,7 @@ const ChatBotDialog = ({ isOpen, onClose, sendMessage, userPreferences }) => {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState([
     { 
-      text: "Hey there! I'm Chef Byte, your energetic meal planning assistant! 🥗 What dietary questions can I help you with today?", 
+      text: "Hey there! I'm NexBuddy, your energetic companion for smart meals 🥗 and fit moves 💪! I’ve got your back—let’s level up your wellness journey! 😄", 
       sender: 'bot' 
     }
   ]);

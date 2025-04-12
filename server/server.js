@@ -11,6 +11,7 @@ dotenv.config();
 const mealRoutes = require('./routes/mealRoutes');
 const userRoutes = require('./routes/userRoutes');
 const chatbotRoutes = require('./routes/chatbotRoutes');
+const workoutRoutes = require("./routes/workoutRoutes");
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT;
@@ -34,6 +35,7 @@ main()
 app.use('/api/meals', mealRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/chatbot', chatbotRoutes);
+app.use("/api/workouts", workoutRoutes);
 
 // Global error handler
 app.use((err, req, res, next) => {

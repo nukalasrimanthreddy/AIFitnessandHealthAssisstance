@@ -63,15 +63,6 @@ exports.getUserMealPlans = async (req, res) => {
       .sort({ generatedFor: -1 })
       .limit(5);
     
-
-    const history = new MealHistory({
-      user: userId,
-      action: 'viewed',
-      details: 'Viewed meal plan history'
-    });
-    
-    await history.save();
-    
     res.status(200).json(mealPlans);
   } catch (error) {
     console.error('Error in getUserMealPlans:', error);
@@ -138,6 +129,7 @@ exports.deleteMealPlan = async (req, res) => {
     
 
     const history = new MealHistory({
+      meal:"Meal",
       user: deletedPlan.user,
       action: 'deleted',
       details: `Deleted meal plan from ${new Date(deletedPlan.generatedFor).toLocaleDateString()}`

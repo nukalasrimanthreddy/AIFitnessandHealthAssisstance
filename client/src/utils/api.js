@@ -56,3 +56,21 @@ export const getChatbotResponse = async (message, history = [], userPreferences 
   });
   return response.data;
 };
+export const generateWorkOutPlan = async (UserId,formData) => {
+  const response = await axios.post(`${API_URL}/workouts/create`, {
+    UserId,
+    formData
+  })
+  console.log(response.data)
+  return response.data
+}
+export const getWorkoutPlans = async (UserId) => {
+  const response = await axios.get(`${API_URL}/workouts/${UserId}`)
+  return response.data
+}
+export const deleteWorkoutPlan = async (planID) => {
+  const response = await axios.delete(`${API_URL}/workouts/${planID}`,{
+    planID
+  })
+  return response.data
+}

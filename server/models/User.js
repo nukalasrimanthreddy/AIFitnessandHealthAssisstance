@@ -33,7 +33,47 @@ const UserSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
     default: Date.now
-  }
+  },
+  workoutHistory: [
+    {
+      generatedAt: {
+        type: Date,
+        default: Date.now
+      },
+      week: [
+        {
+          day: {
+            type: String,
+            required: true
+          },
+          exercises: [
+            {
+              exercise: {
+                type: String,
+                required: true
+              },
+              sets: {
+                type: String, // Keep it string because it can be "3", "Hold for 30 sec", etc.
+                required: true
+              },
+              reps: {
+                type: String,
+                required: true
+              },
+              weight: {
+                type: String,
+                default: '---'
+              },
+              rest: {
+                type: String,
+                default: '---'
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
 });
 
 module.exports = mongoose.model('User', UserSchema);

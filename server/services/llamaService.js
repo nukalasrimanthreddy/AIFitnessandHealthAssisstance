@@ -16,7 +16,7 @@ const client = new OpenAI({
 const generateMealPlan = async (preferences, allergies, pantryItems, calorieTarget, additionalInstructions = '') => {
   try {
     const prompt = `
-      Generate a 1-day meal plan (breakfast, lunch, and dinner) based on:
+      Generate a 7-day meal plan (breakfast, lunch, and dinner) based on:
       
       - Dietary preferences: ${preferences.join(', ') || 'None'}
       - Allergies to avoid: ${allergies.join(', ') || 'None'}
@@ -52,7 +52,7 @@ const generateMealPlan = async (preferences, allergies, pantryItems, calorieTarg
     
     const response = await client.chat.completions.create({
       model: "meta-llama/Meta-Llama-3.1-70B-Instruct-fast",
-      max_tokens: 1500,
+      max_tokens: 5000,
       temperature: 0.7,
       top_p: 0.9,
       extra_body: { top_k: 50 },
@@ -133,8 +133,7 @@ const generateChatbotResponse = async (userMessage, history = [], userPreference
       content: msg.content
     })).slice(-6); 
     
-    let systemMessage = "You are Chef Byte, an energetic, funny, and optimistic AI assistant specializing in dietary advice, nutrition, and meal planning.";
-    
+    let systemMessage = "You are NexBuddy, a vibrant, witty, and encouraging AI assistant specializing in both **meal** and **fitness** planning."
     if (userPreferences) {
       systemMessage += " The user has the following dietary preferences:";
       
@@ -152,25 +151,26 @@ const generateChatbotResponse = async (userMessage, history = [], userPreference
     }
     
     systemMessage += `
-    Your personality traits:
-    - Super energetic and enthusiastic about healthy eating
-    - Optimistic and encouraging about dietary changes
-    - Funny and witty, using food puns and jokes frequently
-    - Supportive and positive, never judgmental
-    - Knowledgeable but explains things in simple, relatable terms
-    
-    Response style and formatting:
-    - Keep responses very concise (under 120 words)
-    - Use Markdown formatting for structure and emphasis
-    - Use **bold** for important points
-    - Use bullet lists for multiple items or steps
-    - Use emojis sparingly (1-2 per response maximum)
-    - Include a touch of humor in most responses
-    - Be conversational and friendly
-    - Provide practical, actionable advice
-    - When listing recipes or food items, use bullet points or numbered lists
-    - Never be verbose or overly detailed
-    `;
+        Your personality traits:
+        - Super energetic and enthusiastic about **healthy living**
+        - Optimistic and encouraging about **both fitness and dietary** improvements
+        - Funny and witty, using **food and workout puns** frequently
+        - Supportive and positive, never judgmental
+        - Knowledgeable but explains things in simple, relatable terms
+
+        Response style and formatting:
+        - Keep responses very concise (under 120 words)
+        - Use Markdown formatting for structure and emphasis
+        - Use **bold** for important points
+        - Use bullet lists for steps, suggestions, meals, or exercises
+        - Use emojis sparingly (1-2 per response max)
+        - Include a touch of humor in most responses
+        - Be conversational and friendly
+        - Provide **practical, actionable** advice for diet or workouts
+        - Use numbered/bullet points when listing meals, workouts, or routines
+        - Avoid being overly detailed or robotic
+        `;
+
 
     const messages = [
       { role: "system", content: systemMessage }

@@ -201,23 +201,24 @@ const MealPlan = () => {
                   </div>
                 </div>
               </div>
-              
-
               {/* Group meals by day */}
               <div className="meal-days">
-                {groupMealsByDay(getActivePlan().meals).map((dayMeals, dayIndex) => (
-                  <div key={dayIndex} className="meal-day">
-                    {/*<h3 className="day-title">Day {dayIndex + 1}</h3>*/}
-
-                    <div className="meal-cards-container">
-                      {dayMeals.map((meal, mealIndex) => (
-                        <div key={mealIndex} className="meal-card-wrapper">
-                          <MealCard meal={meal} />
-                        </div>
-                      ))}
+                {groupMealsByDay(getActivePlan().meals).map((dayMeals, dayIndex) => {
+                  const weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+                  const dayName = weekDays[dayIndex % 7]; // fallback to loop if more than 7 days
+                  return (
+                    <div key={dayIndex} className="meal-day">
+                      <h3 className="day-title">{dayName}</h3>
+                      <div className="meal-cards-container">
+                        {dayMeals.map((meal, mealIndex) => (
+                          <div key={mealIndex} className="meal-card-wrapper">
+                            <MealCard meal={meal} />
+                          </div>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}

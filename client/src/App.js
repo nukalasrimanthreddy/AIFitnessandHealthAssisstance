@@ -9,6 +9,7 @@ import MealHistory from './pages/MealHistory';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ChatBot from './components/ChatBot/ChatBot';
+import WorkoutPlanner from './pages/WorkoutPlan'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -20,6 +21,7 @@ function App() {
           <Navbar />
           <div className="container mt-4">
             <Routes>
+            <Route path="/workout-planner" element={<WorkoutPlanner />} />
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/meal-plan" element={<MealPlan />} />
